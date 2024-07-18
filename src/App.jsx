@@ -32,15 +32,35 @@ const App = () => {
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
   const positiveFeedback = Math.round((feedback.good / totalFeedback) * 100);
 
+  useEffect(() => {
+    const storedFeedback = JSON.parse(localStorage.getItem("feedback"));
+    if (storedFeedback) {
+      setFeedback(storedFeedback);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("feedback", JSON.stringify(feedback));
+  }, [feedback]);
+
   return (
     <div>
       <h1>Sip Happens Café</h1>
-      <Options updateFeedback={updateFeedback} />
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedback}
+        resetFeedback={resetFeedback}
+      />
       {totalFeedback > 0 ? (
-        <Feedback feedback={feedback} />
+        <Feedback feedback={feedback} positiveFeedback={positiveFeedback} />
       ) : (
         <Notification message="Please leave your feedback by selecting one of the options below." />
       )}
+      <p>Total feedback collected: {totalFeedback}</p>
+      <p>
+        Percentage of positive feedback:{" "}
+        {isNaN(positiveFeedback) ? "0%" : `${positiveFeedback}%`}
+      </p>
     </div>
   );
 };

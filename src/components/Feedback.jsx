@@ -1,6 +1,6 @@
 import React from "react";
 
-const Feedback({ feedback }) => {
+const Feedback = ({ feedback }) => {
   return (
     <div>
       <h2>Feedback statistics</h2>
@@ -9,6 +9,6 @@ const Feedback({ feedback }) => {
       <p>Bad: {feedback.bad}</p>
     </div>
   );
-}
+};
 
 export default Feedback;
