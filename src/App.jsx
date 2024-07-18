@@ -2,38 +2,38 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import userData from "./components/userData.json";
-import Profile from "./components/profile.jsx";
-import FriendList from "./components/friendList";
-import friends from "./components/friends.json";
-import TransactionHistory from "./components/transactionHistory";
-import transactions from "./transactions.json";
+
+import Feedback from "./components/Feedback";
+import Options from "./components/Options";
+import Notification from "./components/Notification";
 
 const App = () => {
+  const [feedback, setFeedback] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  });
+
+  const updateFeedback = (feedbackType) => {
+    setFeedback({
+      ...feedback,
+      [feedbackType]: feedback[feedbackType] + 1,
+    });
+  };
+
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+
   return (
-    <div className="app">
-      <Profile
-        name={userData.username}
-        tag={userData.tag}
-        location={userData.location}
-        image={userData.avatar}
-        stats={userData.stats}
-      />
-      <FriendList friends={friends} />
-      <TransactionHistory items={transactions} />
+    <div>
+      <h1>Sip Happens Café</h1>
+      <Options updateFeedback={updateFeedback} />
+      {totalFeedback > 0 ? (
+        <Feedback feedback={feedback} />
+      ) : (
+        <Notification message="Please leave your feedback by selecting one of the options below." />
+      )}
     </div>
   );
 };
 
 export default App;
-
-// import FriendList from "./components/friendList";
-// import friends from "./friends.json";
-
-// const App = () => {
-//   return (
-//     <div className="app">
-//       <FriendList friends={friends} />
-//     </div>
-//   );
-// };
