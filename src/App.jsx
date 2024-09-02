@@ -3,9 +3,9 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-import Feedback from "./components/Feedback";
-import Options from "./components/Options";
-import Notification from "./components/Notification";
+import Feedback from "./components/Feedback/Feedback";
+import Options from "./components/Options/Options";
+import Notification from "./components/Notification/Notification";
 
 const App = () => {
   const [feedback, setFeedback] = useState({
