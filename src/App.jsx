@@ -45,10 +45,7 @@ const App = () => {
 
   return (
     <div>
-      <Description
-        totalFeedback={totalFeedback}
-        positiveFeedbackPercentage={positiveFeedbackPercentage}
-      />
+      <Description />
       <Options
         updateFeedback={updateFeedback}
         totalFeedback={totalFeedback}
@@ -60,7 +57,7 @@ const App = () => {
           positiveFeedbackPercentage={positiveFeedbackPercentage}
         />
       ) : (
-        <Notification message="Please leave your feedback by selecting one of the options below." />
+        <Notification message="No feedback yet" />
       )}
     </div>
   );
